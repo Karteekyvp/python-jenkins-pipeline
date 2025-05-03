@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.7'
-        }
-    }
+    agent any
 
     environment {
         PROJECT_KEY = 'python-jenkins-pipeline'  // must match project key in SonarQube
@@ -29,7 +25,6 @@ pipeline {
 
         stage('Generate Sonar Report') {
             steps {
-                echo "Fetching SonarQube quality gate status and exposing report URL..."
                 script {
                     echo "View your report at: http://localhost:9000/dashboard?id=${env.PROJECT_KEY}"
                 }
@@ -39,10 +34,10 @@ pipeline {
 
     post {
         success {
-            echo "Pipeline completed successfully. SonarQube report is available."
+            echo "✅ Pipeline completed successfully. SonarQube report is available."
         }
         failure {
-            echo "Pipeline failed. Check logs and SonarQube for more details."
+            echo "❌ Pipeline failed. Check logs and SonarQube for more details."
         }
     }
 }
