@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         PROJECT_KEY = 'python-jenkins-pipeline'  // must match project key in SonarQube
+        SONAR_SCANNER = '/opt/homebrew/Cellar/sonar-scanner/7.1.0.4889/bin/sonar-scanner'  // Adjust if sonar-scanner is installed elsewhere
     }
 
     stages {
@@ -28,7 +29,8 @@ pipeline {
             steps {
                 echo "Running SonarQube scanner..."
                 withSonarQubeEnv('sonar-jenkins') {
-                    sh 'sonar-scanner'
+                    // Use full path to sonar-scanner to avoid PATH issues
+                    sh "${env.SONAR_SCANNER}"
                 }
             }
         }
