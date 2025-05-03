@@ -5,11 +5,6 @@ pipeline {
         }
     }
 
-    tools {
-        hudson.plugins.sonar.SonarRunnerInstallation 'SonarScanner'
-    }
-
-
     environment {
         PROJECT_KEY = 'python-jenkins-pipeline'  // must match project key in SonarQube
     }
@@ -36,8 +31,7 @@ pipeline {
             steps {
                 echo "Fetching SonarQube quality gate status and exposing report URL..."
                 script {
-                    // SonarQube provides a report UI; Jenkins just needs to surface the link
-                    echo "Go to: http://localhost:9000/dashboard?id=${env.PROJECT_KEY}"
+                    echo "View your report at: http://localhost:9000/dashboard?id=${env.PROJECT_KEY}"
                 }
             }
         }
