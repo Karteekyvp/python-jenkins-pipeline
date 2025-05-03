@@ -9,8 +9,18 @@ pipeline {
         stage('Build Python Code') {
             steps {
                 echo "Installing dependencies and building the code..."
-                sh 'pip install -r requirements.txt'
-                sh 'python -m compileall .'
+
+                // Show which python is available
+                sh 'echo "Using Python binary:"'
+                sh 'which python || echo "python not found"'
+                sh 'which python3 || echo "python3 not found"'
+                sh 'python3 --version || echo "Python3 not available"'
+
+                // Install dependencies using python3
+                sh 'python3 -m pip install -r requirements.txt'
+
+                // Compile all Python files using python3
+                sh 'python3 -m compileall .'
             }
         }
 
