@@ -6,8 +6,9 @@ pipeline {
     }
 
     tools {
-        sonarQubeScanner 'SonarScanner' // make sure this is configured in Jenkins Global Tools
+        hudson.plugins.sonar.SonarRunnerInstallation 'SonarScanner'
     }
+
 
     environment {
         PROJECT_KEY = 'python-jenkins-pipeline'  // must match project key in SonarQube
